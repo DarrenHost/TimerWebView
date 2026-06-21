@@ -6,12 +6,12 @@ Android WebView application with auto-refresh functionality and persistent confi
 
 | Version | Release Date | Download | Size |
 |---------|--------------|----------|------|
-| **v1.2** | 2026-06-21 | [📱 TimerWebView-v1.2-release.apk](https://github.com/DarrenHost/TimerWebView/releases/download/v1.2/TimerWebView-v1.2-release.apk) | 9.2 MB |
+| **v1.3** | 2026-06-21 | [📱 TimerWebView-v1.3-release.apk](https://github.com/DarrenHost/TimerWebView/releases/download/v1.3/TimerWebView-v1.3-release.apk) | 9.2 MB |
 
 **Direct Download Links:**
-- **GitHub Release**: https://github.com/DarrenHost/TimerWebView/releases/download/v1.2/TimerWebView-v1.2-release.apk
-- **GitHub Assets**: https://github.com/DarrenHost/TimerWebView/blob/master/Assets/TimerWebView-v1.1-release.apk
-- **NAS (Local)**: `/data/gswy/00_临时文件/TimerWebView-v1.0-release.apk`
+- **GitHub Release**: https://github.com/DarrenHost/TimerWebView/releases/download/v1.3/TimerWebView-v1.3-release.apk
+- **GitHub Assets**: https://github.com/DarrenHost/TimerWebView/blob/master/Assets/TimerWebView-v1.3-release.apk
+- **NAS (Local)**: `/data/gswy/00_临时文件/TimerWebView-v1.3-release.apk`
 
 > **Note**: APK is signed and ready for installation. Minimum Android 10 (API 29) required.
 
@@ -114,6 +114,12 @@ All settings are saved locally and persist across app restarts:
 7. **Exit Fullscreen**: Tap WebView 5 times or use menu button
 
 ## Change Log
+
+### v1.3 (2026-06-21)
+- ✅ Fixed settings page input text color (now black)
+- ✅ TitleBar shows countdown timer (MM:SS)
+- ✅ TitleBar shows fullscreen and settings buttons
+- ✅ Click countdown to manually refresh
 
 ### v1.2 (2026-06-21)
 - ✅ New logo design (TW letters with blue circle)
