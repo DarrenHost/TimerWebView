@@ -21,13 +21,13 @@ public class ConfigManager {
     
     // 默认值
     private static final String DEFAULT_URL = "";
-    private static final int DEFAULT_REFRESH_INTERVAL = 5; // 5 分钟
+    private static final int DEFAULT_REFRESH_INTERVAL = 30; // 30 秒
     private static final boolean DEFAULT_JS_ENABLED = true;
     private static final boolean DEFAULT_CACHE_ENABLED = true;
     
     // 配置验证
     private static final int MIN_REFRESH_INTERVAL = 0;
-    private static final int MAX_REFRESH_INTERVAL = 120;
+    private static final int MAX_REFRESH_INTERVAL = 7200; // 7200 秒 = 2 小时
     
     private final SharedPreferences prefs;
     
@@ -50,17 +50,17 @@ public class ConfigManager {
     }
     
     /**
-     * 获取自动刷新间隔（分钟）
+     * 获取自动刷新间隔（秒）
      */
     public int getRefreshInterval() {
         return prefs.getInt(KEY_REFRESH_INTERVAL, DEFAULT_REFRESH_INTERVAL);
     }
     
     /**
-     * 设置自动刷新间隔
+     * 设置自动刷新间隔（秒）
      */
-    public void setRefreshInterval(int minutes) {
-        prefs.edit().putInt(KEY_REFRESH_INTERVAL, minutes).apply();
+    public void setRefreshInterval(int seconds) {
+        prefs.edit().putInt(KEY_REFRESH_INTERVAL, seconds).apply();
     }
     
     /**
@@ -118,7 +118,7 @@ public class ConfigManager {
             .putBoolean(KEY_JS_ENABLED, jsEnabled)
             .putBoolean(KEY_CACHE_ENABLED, cacheEnabled)
             .apply();
-        Log.d(TAG, "配置已保存：URL=" + url + ", 间隔=" + refreshInterval + "分钟");
+        Log.d(TAG, "配置已保存：URL=" + url + ", 间隔=" + refreshInterval + "秒");
     }
     
     /**

@@ -10,28 +10,28 @@
         android:fillColor="#FFFFFF"
         android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0"/>
     
-    <!-- 时钟刻度 -->
+    <!-- 时钟刻度 - 白色 -->
     <path
-        android:strokeColor="#1976D2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M54,22 L54,28 M54,80 L54,86 M22,54 L28,54 M80,54 L86,54"/>
     
-    <!-- 时针 -->
+    <!-- 时针 - 白色 -->
     <path
-        android:strokeColor="#1976D2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:strokeLineCap="round"
         android:pathData="M54,54 L54,40"/>
     
-    <!-- 分针 -->
+    <!-- 分针 - 白色 -->
     <path
-        android:strokeColor="#FF9800"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:strokeLineCap="round"
         android:pathData="M54,54 L68,54"/>
     
-    <!-- 中心点 -->
+    <!-- 中心点 - 白色 -->
     <path
-        android:fillColor="#1976D2"
+        android:fillColor="#FFFFFF"
         android:pathData="M54,54m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
 </vector>

@@ -1,8 +1,10 @@
 package com.github.darrenhost.timerwebview;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
     private SwitchMaterial cacheSwitch;
     private Button restoreDefaultButton;
     private Button saveButton;
+    private TextView versionText;
     
     // 配置管理
     private ConfigManager configManager;
@@ -54,6 +57,22 @@ public class SettingsActivity extends AppCompatActivity {
         cacheSwitch = findViewById(R.id.cacheSwitch);
         restoreDefaultButton = findViewById(R.id.restoreDefaultButton);
         saveButton = findViewById(R.id.saveButton);
+        versionText = findViewById(R.id.versionText);
+        
+        // 显示版本号
+        displayAppVersion();
+    }
+    
+    /**
+     * 显示应用版本号
+     */
+    private void displayAppVersion() {
+        try {
+            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            versionText.setText(getString(R.string.app_version) + ": v" + versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            versionText.setText(getString(R.string.app_version) + ": v1.0");
+        }
     }
     
     /**

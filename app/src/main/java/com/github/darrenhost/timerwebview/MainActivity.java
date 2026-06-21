@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -24,10 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 /**
- * 主页面 - WebView 容器 + 定时刷新功能
+ * 主页面 - WebView 容器 + 定时刷新功能 + 全屏模式
  */
 public class MainActivity extends AppCompatActivity {
     
@@ -52,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAutoRefreshEnabled = false;
     private boolean isAppInBackground = false;
     
+    // 全屏模式
+    private boolean isFullscreen = false;
+    private int fullscreenTapCount = 0;
+    private Handler fullscreenHandler = new Handler(Looper.getMainLooper());
+    private Runnable resetTapRunnable;
+    
     // 网络状态
     private NetworkReceiver networkReceiver;
     
@@ -59,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         
         // 初始化工具类
         configManager = new ConfigManager(this);
@@ -68,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         if (!configManager.isConfigValid()) {
             configManager.restoreDefaults();
         }
+        
+        setContentView(R.layout.activity_main);
         
         // 初始化 UI
         initViews();
@@ -129,6 +138,36 @@ public class MainActivity extends AppCompatActivity {
         
         // 去设置按钮
         goSettingsButton.setOnClickListener(v -> openSettings());
+        
+        // WebView 点击监听 - 用于退出全屏
+        webView.setOnTouchListener((v, event) -> {
+            if (isFullscreen) {
+                handleFullscreenTap();
+            }
+            return false;
+        });
+    }
+    
+    /**
+     * 处理全屏点击
+     */
+    private void handleFullscreenTap() {
+        fullscreenTapCount++;
+        
+        if (fullscreenTapCount >= 5) {
+            exitFullscreen();
+            fullscreenTapCount = 0;
+        } else {
+            int remainingTaps = 5 - fullscreenTapCount;
+            Toast.makeText(this, getString(R.string.tap_to_exit, remainingTaps), Toast.LENGTH_SHORT).show();
+            
+            // 重置计数器（5 秒内不再点击则重置）
+            if (resetTapRunnable != null) {
+                fullscreenHandler.removeCallbacks(resetTapRunnable);
+            }
+            resetTapRunnable = () -> fullscreenTapCount = 0;
+            fullscreenHandler.postDelayed(resetTapRunnable, 5000);
+        }
     }
     
     /**
@@ -252,16 +291,16 @@ public class MainActivity extends AppCompatActivity {
     private void startAutoRefresh() {
         stopAutoRefresh(); // 先停止之前的
         
-        int intervalMinutes = configManager.getRefreshInterval();
+        int intervalSeconds = configManager.getRefreshInterval();
         
-        if (intervalMinutes <= 0 || isAppInBackground) {
+        if (intervalSeconds <= 0 || isAppInBackground) {
             isAutoRefreshEnabled = false;
             countdownText.setVisibility(View.GONE);
             return;
         }
         
         isAutoRefreshEnabled = true;
-        countdownSeconds = intervalMinutes * 60;
+        countdownSeconds = intervalSeconds;
         updateCountdownDisplay();
         countdownText.setVisibility(View.VISIBLE);
         
@@ -274,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
                     if (countdownSeconds <= 0) {
                         // 刷新页面
                         webView.reload();
-                        countdownSeconds = intervalMinutes * 60;
+                        countdownSeconds = intervalSeconds;
                         Toast.makeText(MainActivity.this, "页面已自动刷新", Toast.LENGTH_SHORT).show();
                     }
                     
@@ -332,6 +371,56 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     
+    /**
+     * 切换全屏模式
+     */
+    private void toggleFullscreen() {
+        if (isFullscreen) {
+            exitFullscreen();
+        } else {
+            enterFullscreen();
+        }
+    }
+    
+    /**
+     * 进入全屏模式
+     */
+    private void enterFullscreen() {
+        isFullscreen = true;
+        fullscreenTapCount = 0;
+        
+        // 隐藏状态栏和导航栏
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        );
+        
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_FULLSCREEN |
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
+        
+        Toast.makeText(this, R.string.fullscreen, Toast.LENGTH_SHORT).show();
+    }
+    
+    /**
+     * 退出全屏模式
+     */
+    private void exitFullscreen() {
+        isFullscreen = false;
+        fullscreenTapCount = 0;
+        
+        // 显示状态栏和导航栏
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        
+        Toast.makeText(this, R.string.exit_fullscreen, Toast.LENGTH_SHORT).show();
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -347,6 +436,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.menu_settings) {
             openSettings();
+            return true;
+        } else if (id == R.id.menu_fullscreen) {
+            toggleFullscreen();
             return true;
         }
         
@@ -392,14 +484,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-    }
-    
-    /**
-     * 配置变更时重新加载
-     */
-    @Override
-    public void onConfigurationChanged(android.content.res.Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // 配置变更时保持当前状态
     }
 }

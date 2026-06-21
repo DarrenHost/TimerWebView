@@ -14,8 +14,8 @@
     <!-- Settings -->
     <string name="url_label">目标 URL</string>
     <string name="url_hint">请输入 http:// 或 https:// 开头的网址</string>
-    <string name="refresh_interval">自动刷新间隔（分钟）</string>
-    <string name="refresh_interval_hint">0 = 关闭自动刷新，最大 120 分钟</string>
+    <string name="refresh_interval">自动刷新间隔（秒）</string>
+    <string name="refresh_interval_hint">0 = 关闭自动刷新，最大 7200 秒（2 小时）</string>
     <string name="js_enabled">启用 JavaScript</string>
     <string name="cache_enabled">启用缓存</string>
     <string name="restore_default">恢复默认配置</string>
@@ -23,4 +23,8 @@
     <string name="saved">配置已保存</string>
     <string name="invalid_url">URL 格式无效</string>
     <string name="default_restored">已恢复默认配置</string>
+    <string name="app_version">应用版本</string>
+    <string name="fullscreen">全屏</string>
+    <string name="exit_fullscreen">退出全屏</string>
+    <string name="tap_to_exit">再点击 %d 次退出全屏</string>
 </resources>

@@ -9,8 +9,14 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/menu_fullscreen"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="@string/fullscreen"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menu_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/menu_settings"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 </menu>
