@@ -12,7 +12,7 @@
     <!-- 全屏按钮 -->
     <item
         android:id="@+id/menu_fullscreen"
-        android:icon="@android:drawable/ic_menu_view"
+        android:icon="@drawable/maximize"
         android:title="@string/fullscreen"
         app:iconTint="#FFFFFF"
         app:showAsAction="ifRoom" />
@@ -20,7 +20,7 @@
     <!-- 设置按钮 -->
     <item
         android:id="@+id/menu_settings"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/setting"
         android:title="@string/menu_settings"
         app:iconTint="#FFFFFF"
         app:showAsAction="ifRoom" />
