@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#1976D2</color>
-    <color name="primary_dark">#1565C0</color>
-    <color name="accent">#FF9800</color>
+    <!-- Bootstrap 风格主色 -->
+    <color name="bootstrap_primary">#0d6efd</color>
+    <color name="bootstrap_primary_dark">#0a58ca</color>
+    <color name="bootstrap_secondary">#6c757d</color>
+    <color name="bootstrap_success">#198754</color>
+    <color name="bootstrap_danger">#dc3545</color>
+    <color name="bootstrap_warning">#ffc107</color>
+    <color name="bootstrap_info">#0dcaf0</color>
+    <color name="bootstrap_light">#f8f9fa</color>
+    <color name="bootstrap_dark">#212529</color>
+    
+    <!-- 基础色 -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="gray">#888888</color>
-    <color name="light_gray">#F5F5F5</color>
-    <color name="error">#F44336</color>
+    <color name="gray">#6c757d</color>
+    <color name="light_gray">#e9ecef</color>
+    <color name="border_gray">#dee2e6</color>
+    
+    <!-- 原有兼容色 -->
+    <color name="primary">@color/bootstrap_primary</color>
+    <color name="primary_dark">@color/bootstrap_primary_dark</color>
+    <color name="accent">@color/bootstrap_warning</color>
+    <color name="error">@color/bootstrap_danger</color>
 </resources>

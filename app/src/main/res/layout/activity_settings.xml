@@ -1,109 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bootstrap_light">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
-        <!-- URL 输入 -->
-        <com.google.android.material.textfield.TextInputLayout
+        <!-- 卡片容器 -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/url_label"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/white">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/urlInput"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textUri"
-                android:maxLines="3"
-                android:textColor="@color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                android:padding="20dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/url_hint"
-            android:textSize="12sp"
-            android:textColor="@color/gray"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp" />
+                <!-- URL 输入 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="URL 地址"
+                    android:textSize="14sp"
+                    android:textColor="@color/bootstrap_dark"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
 
-        <!-- 刷新间隔 -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/refresh_interval"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/BootstrapTextInputLayout"
+                    app:boxStrokeColor="@color/border_gray">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/refreshIntervalInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/urlInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textUri"
+                        android:maxLines="3"
+                        android:textColor="@color/bootstrap_dark"
+                        android:hint="http:// or https://" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/refresh_interval_hint"
-            android:textSize="12sp"
-            android:textColor="@color/gray"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="请输入 http:// 或 https:// 开头的网址"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="20dp" />
 
-        <!-- JS 开关 -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/jsSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/js_enabled"
-            android:checked="true"
-            android:layout_marginBottom="16dp" />
+                <!-- 刷新间隔 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="刷新间隔（秒）"
+                    android:textSize="14sp"
+                    android:textColor="@color/bootstrap_dark"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
 
-        <!-- 缓存开关 -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/cacheSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cache_enabled"
-            android:checked="true"
-            android:layout_marginBottom="24dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/BootstrapTextInputLayout"
+                    app:boxStrokeColor="@color/border_gray">
 
-        <!-- 恢复默认按钮 -->
-        <Button
-            android:id="@+id/restoreDefaultButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/restore_default"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginBottom="16dp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/refreshIntervalInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textColor="@color/bootstrap_dark"
+                        android:hint="30" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- 保存按钮 -->
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/save" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 = 关闭自动刷新，最大 7200 秒（2 小时）"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- JS 开关 -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/jsSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="启用 JavaScript"
+                    android:textSize="15sp"
+                    android:textColor="@color/bootstrap_dark"
+                    android:checked="true"
+                    android:layout_marginBottom="16dp"
+                    app:thumbTint="@color/bootstrap_primary"
+                    app:trackTint="@color/bootstrap_primary" />
+
+                <!-- 缓存开关 -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/cacheSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="启用缓存"
+                    android:textSize="15sp"
+                    android:textColor="@color/bootstrap_dark"
+                    android:checked="true"
+                    android:layout_marginBottom="24dp"
+                    app:thumbTint="@color/bootstrap_primary"
+                    app:trackTint="@color/bootstrap_primary" />
+
+                <!-- 按钮组 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- 恢复默认按钮 - Outline 风格 -->
+                    <Button
+                        android:id="@+id/restoreDefaultButton"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="恢复默认"
+                        android:textSize="15sp"
+                        style="@style/BootstrapButton.Outline"
+                        android:layout_marginEnd="8dp" />
+
+                    <!-- 保存按钮 - Primary 风格 -->
+                    <Button
+                        android:id="@+id/saveButton"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="保存配置"
+                        android:textSize="15sp"
+                        style="@style/BootstrapButton" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- 版本号显示 -->
         <TextView
             android:id="@+id/versionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_version"
-            android:textSize="12sp"
+            android:text="应用版本"
+            android:textSize="13sp"
             android:textColor="@color/gray"
             android:gravity="center"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:paddingTop="16dp" />
 
     </LinearLayout>
