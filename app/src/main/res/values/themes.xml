@@ -5,5 +5,8 @@
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorAccent">@color/accent</item>
+        <!-- ActionBar 标题和菜单文字颜色 -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
     </style>
 </resources>

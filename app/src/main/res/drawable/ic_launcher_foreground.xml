@@ -5,33 +5,39 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
     
-    <!-- 时钟背景圆 -->
+    <!-- 背景圆形 - 蓝色渐变 -->
     <path
-        android:fillColor="#FFFFFF"
+        android:fillColor="#1976D2"
         android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0"/>
     
-    <!-- 时钟刻度 - 白色 -->
-    <path
-        android:strokeColor="#FFFFFF"
-        android:strokeWidth="2"
-        android:pathData="M54,22 L54,28 M54,80 L54,86 M22,54 L28,54 M80,54 L86,54"/>
-    
-    <!-- 时针 - 白色 -->
+    <!-- 外圈环 - 白色 -->
     <path
         android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
-        android:strokeLineCap="round"
-        android:pathData="M54,54 L54,40"/>
+        android:fillColor="#00000000"
+        android:pathData="M54,54m-35,0a35,35 0,1 1,70 0a35,35 0,1 1,-70 0"/>
     
-    <!-- 分针 - 白色 -->
-    <path
-        android:strokeColor="#FFFFFF"
-        android:strokeWidth="2"
-        android:strokeLineCap="round"
-        android:pathData="M54,54 L68,54"/>
-    
-    <!-- 中心点 - 白色 -->
+    <!-- T 字母 - 白色 -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,54m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+        android:pathData="M42,35 L66,35 L66,42 L58,42 L58,68 L50,68 L50,42 L42,42 Z"/>
+    
+    <!-- W 字母 - 白色 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M62,42 L68,42 L68,68 L62,68 Z M58,52 L62,52 L65,68 L59,68 Z M54,52 L58,52 L55,68 L49,68 Z M50,52 L54,52 L51,68 L45,68 Z"/>
+    
+    <!-- 刷新箭头环绕 - 白色 -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:pathData="M54,20 A34,34 0 0,1 80,32"/>
+    
+    <!-- 箭头头部 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M78,28 L82,32 L76,34 Z"/>
+    
 </vector>

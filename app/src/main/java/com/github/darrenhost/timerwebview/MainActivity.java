@@ -389,6 +389,11 @@ public class MainActivity extends AppCompatActivity {
         isFullscreen = true;
         fullscreenTapCount = 0;
         
+        // 隐藏 ActionBar (TitleBar)
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+        
         // 隐藏状态栏和导航栏
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -417,6 +422,11 @@ public class MainActivity extends AppCompatActivity {
         
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        
+        // 显示 ActionBar (TitleBar)
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().show();
+        }
         
         Toast.makeText(this, R.string.exit_fullscreen, Toast.LENGTH_SHORT).show();
     }
