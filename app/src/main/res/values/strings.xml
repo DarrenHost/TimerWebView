@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TimerWebView</string>
+    <string name="settings">设置</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_refresh">刷新</string>
+    <string name="loading">加载中...</string>
+    <string name="load_error">页面加载失败</string>
+    <string name="retry">重试</string>
+    <string name="no_network">无网络连接</string>
+    <string name="no_url">未设置 URL，请前往设置</string>
+    <string name="go_settings">去设置</string>
+    
+    <!-- Settings -->
+    <string name="url_label">目标 URL</string>
+    <string name="url_hint">请输入 http:// 或 https:// 开头的网址</string>
+    <string name="refresh_interval">自动刷新间隔（分钟）</string>
+    <string name="refresh_interval_hint">0 = 关闭自动刷新，最大 120 分钟</string>
+    <string name="js_enabled">启用 JavaScript</string>
+    <string name="cache_enabled">启用缓存</string>
+    <string name="restore_default">恢复默认配置</string>
+    <string name="save">保存</string>
+    <string name="saved">配置已保存</string>
+    <string name="invalid_url">URL 格式无效</string>
+    <string name="default_restored">已恢复默认配置</string>
+</resources>
