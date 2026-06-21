@@ -9,5 +9,7 @@
 .cxx
 local.properties
 app/build
-*.apk
-*.aab
+
+# Assets 目录中的 APK 允许提交
+!Assets/*.apk
+!Assets/*.aab
