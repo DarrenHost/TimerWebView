@@ -5,39 +5,35 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
     
-    <!-- 背景圆形 - 蓝色渐变 -->
+    <!-- 背景圆形 - TestFlight 风格蓝色 -->
     <path
-        android:fillColor="#1976D2"
+        android:fillColor="#3B82F6"
         android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0"/>
     
-    <!-- 外圈环 - 白色 -->
+    <!-- 微妙渐变效果 - 上亮下暗 -->
     <path
-        android:strokeColor="#FFFFFF"
-        android:strokeWidth="3"
-        android:fillColor="#00000000"
-        android:pathData="M54,54m-35,0a35,35 0,1 1,70 0a35,35 0,1 1,-70 0"/>
+        android:fillColor="#60A5FA"
+        android:pathData="M54,14c-22.1,0 -40,17.9 -40,40c0,2.5 0.2,4.9 0.7,7.3C16.9,42.7 33.8,28 54,28s37.1,14.7 39.3,33.3c0.5,-2.4 0.7,-4.8 0.7,-7.3C94,31.9 76.1,14 54,14z"
+        android:fillAlpha="0.3"/>
     
-    <!-- T 字母 - 白色 -->
+    <!-- T 字母 - 白色，圆角 -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M42,35 L66,35 L66,42 L58,42 L58,68 L50,68 L50,42 L42,42 Z"/>
+        android:pathData="M34,34 L74,34 L74,42 L58,42 L58,74 L50,74 L50,42 L34,42 Z"/>
     
-    <!-- W 字母 - 白色 -->
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M62,42 L68,42 L68,68 L62,68 Z M58,52 L62,52 L65,68 L59,68 Z M54,52 L58,52 L55,68 L49,68 Z M50,52 L54,52 L51,68 L45,68 Z"/>
-    
-    <!-- 刷新箭头环绕 - 白色 -->
+    <!-- 倒计时圆环 - 半透明白色 -->
     <path
         android:strokeColor="#FFFFFF"
-        android:strokeWidth="2.5"
+        android:strokeWidth="2"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
-        android:pathData="M54,20 A34,34 0 0,1 80,32"/>
+        android:pathData="M54,20 A34,34 0 0,1 80,32"
+        android:fillAlpha="0.5"/>
     
     <!-- 箭头头部 -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M78,28 L82,32 L76,34 Z"/>
+        android:pathData="M78,28 L82,32 L76,34 Z"
+        android:fillAlpha="0.5"/>
     
 </vector>

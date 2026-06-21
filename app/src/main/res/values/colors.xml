@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- TestFlight 风格蓝色 -->
+    <color name="testflight_blue">#3B82F6</color>
+    <color name="testflight_blue_light">#60A5FA</color>
+    
     <!-- Bootstrap 风格主色 -->
     <color name="bootstrap_primary">#0d6efd</color>
     <color name="bootstrap_primary_dark">#0a58ca</color>
