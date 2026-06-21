@@ -13,3 +13,7 @@ app/build
 # Assets 目录中的 APK 允许提交
 !Assets/*.apk
 !Assets/*.aab
+
+# 签名密钥（敏感文件，不提交）
+*.keystore
+*.jks

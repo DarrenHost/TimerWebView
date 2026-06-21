@@ -14,8 +14,18 @@ android {
         versionName "1.0"
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../timerwebview.keystore')
+            storePassword 'darren123456'
+            keyAlias 'timerwebview'
+            keyPassword 'darren123456'
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -48,13 +58,13 @@ tasks.register('copyDebugApk', Copy) {
 
 tasks.register('copyReleaseApk', Copy) {
     description = '复制 Release APK 到 Assets 目录'
-    from file('build/outputs/apk/release/app-release-unsigned.apk')
+    from file('build/outputs/apk/release/app-release.apk')
     into file('../Assets')
     rename { fileName ->
-        "TimerWebView-v${android.defaultConfig.versionName}-release-unsigned.apk"
+        "TimerWebView-v${android.defaultConfig.versionName}-release.apk"
     }
     doLast {
-        println "✅ Release APK 已复制到 Assets 目录 (未签名)"
+        println "✅ Release APK 已复制到 Assets 目录"
     }
 }
 
@@ -62,7 +72,7 @@ tasks.register('copyReleaseApk', Copy) {
 tasks.register('copyToGswy', Copy) {
     description = '复制 APK 到高盛伟业临时文件目录'
     dependsOn 'assembleRelease'
-    from file('build/outputs/apk/release/app-release-unsigned.apk')
+    from file('build/outputs/apk/release/app-release.apk')
     into file('/data/gswy/00_临时文件')
     rename { fileName ->
         "TimerWebView-v${android.defaultConfig.versionName}-release.apk"
