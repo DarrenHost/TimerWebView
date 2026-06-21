@@ -4,11 +4,14 @@ Android WebView application with auto-refresh functionality and persistent confi
 
 ## 📥 Download APK
 
-| Version | Release Date | Download |
-|---------|--------------|----------|
-| **v1.2** | 2026-06-21 | [GitHub Releases](https://github.com/DarrenHost/TimerWebView/releases) |
-| **v1.2** | 2026-06-21 | [Assets/TimerWebView-v1.1-release.apk](https://github.com/DarrenHost/TimerWebView/blob/master/Assets/TimerWebView-v1.1-release.apk) |
-| **v1.2** | 2026-06-21 | [NAS /data/gswy/00_临时文件/TimerWebView-v1.0-release.apk](file://192.168.2.233/gswy/00_临时文件/TimerWebView-v1.0-release.apk) |
+| Version | Release Date | Download | Size |
+|---------|--------------|----------|------|
+| **v1.2** | 2026-06-21 | [📱 TimerWebView-v1.2-release.apk](https://github.com/DarrenHost/TimerWebView/releases/download/v1.2/TimerWebView-v1.2-release.apk) | 9.2 MB |
+
+**Direct Download Links:**
+- **GitHub Release**: https://github.com/DarrenHost/TimerWebView/releases/download/v1.2/TimerWebView-v1.2-release.apk
+- **GitHub Assets**: https://github.com/DarrenHost/TimerWebView/blob/master/Assets/TimerWebView-v1.1-release.apk
+- **NAS (Local)**: `/data/gswy/00_临时文件/TimerWebView-v1.0-release.apk`
 
 > **Note**: APK is signed and ready for installation. Minimum Android 10 (API 29) required.
 
