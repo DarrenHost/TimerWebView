@@ -57,3 +57,17 @@ tasks.register('copyReleaseApk', Copy) {
         println "✅ Release APK 已复制到 Assets 目录 (未签名)"
     }
 }
+
+// 复制 APK 到 /data/gswy/00_临时文件 目录
+tasks.register('copyToGswy', Copy) {
+    description = '复制 APK 到高盛伟业临时文件目录'
+    dependsOn 'assembleRelease'
+    from file('build/outputs/apk/release/app-release-unsigned.apk')
+    into file('/data/gswy/00_临时文件')
+    rename { fileName ->
+        "TimerWebView-v${android.defaultConfig.versionName}-release.apk"
+    }
+    doLast {
+        println "✅ APK 已复制到 /data/gswy/00_临时文件"
+    }
+}
