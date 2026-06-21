@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimerWebView - Linear Style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;510;590&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Linear Design System - TimerWebView Implementation */
+    :root {
+      /* Backgrounds */
+      --bg-marketing: #08090a;
+      --bg-panel: #0f1011;
+      --bg-surface: #191a1b;
+      --bg-surface-hover: #28282c;
+      
+      /* Text */
+      --text-primary: #f7f8f8;
+      --text-secondary: #d0d6e0;
+      --text-tertiary: #8a8f98;
+      --text-quaternary: #62666d;
+      
+      /* Brand */
+      --brand-indigo: #5e6ad2;
+      --brand-violet: #7170ff;
+      --brand-hover: #828fff;
+      
+      /* Borders */
+      --border-subtle: rgba(255,255,255,0.05);
+      --border-standard: rgba(255,255,255,0.08);
+      --border-primary: #23252a;
+      
+      /* Status */
+      --success-green: #27a644;
+      --error-red: #dc3545;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-feature-settings: 'cv01', 'ss03';
+      background: var(--bg-marketing);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Status Bar */
+    .status-bar {
+      height: 44px;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    
+    .status-left {
+      color: var(--text-primary);
+    }
+    
+    .status-right {
+      color: var(--text-primary);
+      font-size: 13px;
+    }
+    
+    /* App Header */
+    .app-header {
+      height: 60px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+    
+    .app-title {
+      font-size: 18px;
+      font-weight: 510;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+    }
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    /* Countdown Badge */
+    .countdown-badge {
+      background: rgba(94, 106, 210, 0.15);
+      color: var(--brand-violet);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 510;
+      font-family: 'JetBrains Mono', monospace;
+      border: 1px solid rgba(94, 106, 210, 0.3);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .countdown-badge:hover {
+      background: rgba(94, 106, 210, 0.25);
+      border-color: var(--brand-violet);
+    }
+    
+    /* Icon Buttons */
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 18px;
+    }
+    
+    .icon-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--border-standard);
+      color: var(--text-primary);
+    }
+    
+    /* WebView Container */
+    .webview-container {
+      flex: 1;
+      background: #ffffff;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    /* Error State */
+    .error-state {
+      text-align: center;
+      padding: 40px;
+      max-width: 380px;
+    }
+    
+    .android-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+    }
+    
+    .error-title {
+      font-size: 24px;
+      font-weight: 590;
+      color: #212529;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    
+    .error-desc {
+      font-size: 15px;
+      color: #6c757d;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .error-code-box {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .error-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--error-red);
+      font-weight: 500;
+    }
+    
+    /* Primary Button */
+    .btn-primary {
+      background: var(--brand-indigo);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 15px;
+      font-weight: 510;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-primary:hover {
+      background: var(--brand-hover);
+      transform: translateY(-1px);
+    }
+    
+    /* Bottom Countdown Overlay */
+    .bottom-countdown {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-standard);
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 510;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    /* Settings Panel (Hidden by default) */
+    .settings-panel {
+      display: none;
+      position: fixed;
+      top: 104px;
+      right: 0;
+      width: 100%;
+      max-width: 414px;
+      height: calc(100vh - 104px);
+      background: var(--bg-marketing);
+      border-left: 1px solid var(--border-subtle);
+      padding: 24px;
+      overflow-y: auto;
+      z-index: 100;
+    }
+    
+    .settings-panel.active {
+      display: block;
+    }
+    
+    .settings-title {
+      font-size: 24px;
+      font-weight: 590;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+    
+    /* Settings Card */
+    .settings-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-standard);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 510;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    
+    .input-field {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-standard);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+    
+    .input-field:focus {
+      outline: none;
+      border-color: var(--brand-indigo);
+      background: rgba(255,255,255,0.03);
+    }
+    
+    .input-hint {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-top: 6px;
+    }
+    
+    /* Toggle Switch */
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .toggle-group:last-child {
+      border-bottom: none;
+    }
+    
+    .toggle-label {
+      font-size: 15px;
+      font-weight: 510;
+      color: var(--text-primary);
+    }
+    
+    .toggle-switch {
+      width: 44px;
+      height: 24px;
+      background: var(--brand-indigo);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ffffff;
+      border-radius: 50%;
+      top: 2px;
+      right: 2px;
+      transition: transform 0.2s ease;
+    }
+    
+    /* Button Group */
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    
+    .btn-outline {
+      flex: 1;
+      background: transparent;
+      color: var(--brand-indigo);
+      border: 2px solid var(--brand-indigo);
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 15px;
+      font-weight: 510;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(94, 106, 210, 0.1);
+    }
+    
+    /* Version Text */
+    .version-text {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--bg-panel);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-primary);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-quaternary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <div class="status-left">18:56</div>
+    <div class="status-right">5G 🔋</div>
+  </div>
+  
+  <!-- App Header -->
+  <div class="app-header">
+    <div class="app-title">TimerWebView</div>
+    <div class="header-actions">
+      <div class="countdown-badge" onclick="location.reload()" title="点击刷新">00:17</div>
+      <button class="icon-btn" onclick="toggleFullscreen()" title="全屏">⛶</button>
+      <button class="icon-btn" onclick="toggleSettings()" title="设置">⚙</button>
+    </div>
+  </div>
+  
+  <!-- WebView Container -->
+  <div class="webview-container">
+    <div class="error-state">
+      <div class="android-icon">🤖</div>
+      <h1 class="error-title">网页无法打开</h1>
+      <p class="error-desc">位于 <strong>http://www.123.com/</strong> 的网页无法加载，因为：</p>
+      <div class="error-code-box">
+        <code class="error-code">net::ERR_NAME_NOT_RESOLVED</code>
+      </div>
+      <button class="btn-primary" onclick="location.reload()">重试</button>
+    </div>
+    
+    <div class="bottom-countdown">下次刷新：00:17</div>
+  </div>
+  
+  <!-- Settings Panel -->
+  <div class="settings-panel" id="settingsPanel">
+    <h2 class="settings-title">设置</h2>
+    
+    <div class="settings-card">
+      <div class="input-group">
+        <label class="input-label">URL 地址</label>
+        <input type="text" class="input-field" value="http://www.example.com" placeholder="http:// or https://">
+        <p class="input-hint">请输入 http:// 或 https:// 开头的网址</p>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">刷新间隔（秒）</label>
+        <input type="number" class="input-field" value="30" placeholder="30">
+        <p class="input-hint">0 = 关闭自动刷新，最大 7200 秒（2 小时）</p>
+      </div>
+      
+      <div class="toggle-group">
+        <span class="toggle-label">启用 JavaScript</span>
+        <div class="toggle-switch"></div>
+      </div>
+      
+      <div class="toggle-group">
+        <span class="toggle-label">启用缓存</span>
+        <div class="toggle-switch"></div>
+      </div>
+      
+      <div class="button-group">
+        <button class="btn-outline">恢复默认</button>
+        <button class="btn-primary">保存配置</button>
+      </div>
+      
+      <div class="version-text">应用版本：v1.5</div>
+    </div>
+  </div>
+  
+  <script>
+    // Toggle Settings Panel
+    function toggleSettings() {
+      const panel = document.getElementById('settingsPanel');
+      panel.classList.toggle('active');
+    }
+    
+    // Toggle Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    // Countdown simulation
+    let seconds = 17;
+    setInterval(() => {
+      seconds = (seconds - 1 + 60) % 60;
+      const mm = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const ss = String(seconds).padStart(2, '0');
+      document.querySelector('.countdown-badge').textContent = `${mm}:${ss}`;
+      document.querySelector('.bottom-countdown').textContent = `下次刷新：${mm}:${ss}`;
+    }, 1000);
+  </script>
+</body>
+</html>
