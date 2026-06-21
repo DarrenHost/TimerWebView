@@ -88,8 +88,7 @@ gradle assembleRelease copyToGswy
 APK output:
 - **Debug**: `app/build/outputs/apk/debug/app-debug.apk`
 - **Release**: `app/build/outputs/apk/release/app-release.apk`
-- **Assets**: `Assets/TimerWebView-v{version}-release.apk`
-- **NAS**: `/data/gswy/00_临时文件/TimerWebView-v{version}-release.apk`
+
 
 ## Configuration
 
