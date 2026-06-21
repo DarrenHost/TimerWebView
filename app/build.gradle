@@ -34,15 +34,6 @@ dependencies {
 }
 
 // 编译完成后复制 APK 到 Assets 目录
-tasks.whenTaskAdded { task ->
-    if (task.name == 'assembleDebug') {
-        task.finalizedBy copyDebugApk
-    }
-    if (task.name == 'assembleRelease') {
-        task.finalizedBy copyReleaseApk
-    }
-}
-
 tasks.register('copyDebugApk', Copy) {
     description = '复制 Debug APK 到 Assets 目录'
     from file('build/outputs/apk/debug/app-debug.apk')
@@ -57,12 +48,12 @@ tasks.register('copyDebugApk', Copy) {
 
 tasks.register('copyReleaseApk', Copy) {
     description = '复制 Release APK 到 Assets 目录'
-    from file('build/outputs/apk/release/app-release.apk')
+    from file('build/outputs/apk/release/app-release-unsigned.apk')
     into file('../Assets')
     rename { fileName ->
-        "TimerWebView-v${android.defaultConfig.versionName}-release.apk"
+        "TimerWebView-v${android.defaultConfig.versionName}-release-unsigned.apk"
     }
     doLast {
-        println "✅ Release APK 已复制到 Assets 目录"
+        println "✅ Release APK 已复制到 Assets 目录 (未签名)"
     }
 }
