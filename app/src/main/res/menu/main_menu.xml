@@ -2,13 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- 倒计时显示 -->
     <item
-        android:id="@+id/menu_refresh"
-        android:icon="@android:drawable/ic_menu_rotate"
-        android:title="@string/menu_refresh"
-        app:iconTint="#FFFFFF"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/menu_countdown"
+        android:title=""
+        app:showAsAction="ifRoom|withText"
+        app:actionLayout="@layout/menu_countdown" />
 
+    <!-- 全屏按钮 -->
     <item
         android:id="@+id/menu_fullscreen"
         android:icon="@android:drawable/ic_menu_view"
@@ -16,10 +17,11 @@
         app:iconTint="#FFFFFF"
         app:showAsAction="ifRoom" />
 
+    <!-- 设置按钮 -->
     <item
         android:id="@+id/menu_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/menu_settings"
         app:iconTint="#FFFFFF"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

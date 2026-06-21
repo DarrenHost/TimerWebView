@@ -60,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
     private Handler fullscreenHandler = new Handler(Looper.getMainLooper());
     private Runnable resetTapRunnable;
     
+    // 菜单倒计时显示
+    private MenuItem countdownMenuItem;
+    private TextView countdownTextView;
+    
     // 网络状态
     private NetworkReceiver networkReceiver;
     
@@ -344,8 +348,17 @@ public class MainActivity extends AppCompatActivity {
     private void updateCountdownDisplay() {
         int minutes = countdownSeconds / 60;
         int seconds = countdownSeconds % 60;
-        String text = String.format("下次刷新：%02d:%02d", minutes, seconds);
-        countdownText.setText(text);
+        String text = String.format("%02d:%02d", minutes, seconds);
+        
+        // 更新底部倒计时
+        if (countdownText != null) {
+            countdownText.setText("下次刷新：" + text);
+        }
+        
+        // 更新标题栏倒计时
+        if (countdownTextView != null) {
+            countdownTextView.setText(text);
+        }
     }
     
     /**
@@ -434,6 +447,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        
+        // 获取倒计时菜单项
+        countdownMenuItem = menu.findItem(R.id.menu_countdown);
+        TextView actionView = (TextView) countdownMenuItem.getActionView();
+        if (actionView != null) {
+            countdownTextView = actionView;
+            countdownTextView.setOnClickListener(v -> manualRefresh());
+        }
+        
         return true;
     }
     
@@ -441,14 +463,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         
-        if (id == R.id.menu_refresh) {
-            manualRefresh();
+        if (id == R.id.menu_fullscreen) {
+            toggleFullscreen();
             return true;
         } else if (id == R.id.menu_settings) {
             openSettings();
-            return true;
-        } else if (id == R.id.menu_fullscreen) {
-            toggleFullscreen();
             return true;
         }
         
